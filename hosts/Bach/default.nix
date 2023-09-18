@@ -1,40 +1,37 @@
-{ pkgs, inputs, ... }:
+{ pkgs, home-manager, ... }:
+{
+  nix.useDaemon = true;
 
-let
-	inherit (inputs) home-manager gitcm;
-	gitcmpkgs = import gitcm { inherit pkgs; };
-in {
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  # Will be fixed in Nix eventually
+  users.users.antony.home = "/Users/antony";
+  home-manager.users.antony = import ./home.nix { inherit pkgs; };
 
-	nix.useDaemon = true;
+  environment.systemPackages = [
+    pkgs.git-credential-manager
+  ];
 
-	home-manager.useGlobalPkgs = true;
-	home-manager.useUserPackages = true;
-	#home-manager.users.antony = import ./home.nix { inherit pkgs; };
+  # enable this so nix-darwin creates a zshrc sourcing needed environment changes
+  programs.zsh.enable = true;
 
-	environment.systemPackages = [
-		gitcmpkgs.git-credential-manager
+  services.nix-daemon.enable = true;
+  nix.package = pkgs.nixFlakes;
+  nix.gc.automatic = true;
+
+  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.auto-optimise-store = true;
+
+  homebrew = {
+    enable = true;
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
+    casks = [
+      # "hammerspoon"
     ];
-	
-	# you'll need to enable this so nix-darwin creates a zshrc sourcing needed environment changes
-	programs.zsh.enable = true;
+  };
 
-	services.nix-daemon.enable = true;
-	nix.package = pkgs.nixFlakes;
- 	nix.gc.automatic = true;
-
-	nix.settings.experimental-features = "nix-command flakes";
-	nix.settings.auto-optimise-store = true;
-	
-	#homebrew = {
-	#	enable = true;
-	#	onActivation.autoUpdate = true;
-	#	onActivation.upgrade = true;
-	#	casks = [
-	#		# "hammerspoon"
-	#	];
-	#};
-
-	# Used for backwards compatibility, please read the changelog before changing.
-	# $ darwin-rebuild changelog
-	system.stateVersion = 4;
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
 }
