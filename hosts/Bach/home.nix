@@ -78,7 +78,7 @@
       userEmail = "antony.blakey@gmail.com";
       extraConfig = {
         credential = {
-          credentialStore = "secretservice";
+          credentialStore = "keychain";
           helper = "${pkgs.git-credential-manager}/bin/git-credential-manager-core";
         };
       };
