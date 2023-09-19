@@ -51,20 +51,20 @@
 
     jq.enable = true;
 
-    starship = {
-      enable = true;
-      settings = {
-        add_newline = false;
+    # starship = {
+    #   enable = true;
+    #   settings = {
+    #     add_newline = false;
 
-        character = {
-          success_symbol = "[>](bold green)";
-          error_symbol = "[x](bold red)";
-          vimcmd_symbol = "[<](bold green)";
-        };
+    #     character = {
+    #       success_symbol = "[>](bold green)";
+    #       error_symbol = "[x](bold red)";
+    #       vimcmd_symbol = "[<](bold green)";
+    #     };
 
-        package.disabled = true;
-      };
-    };
+    #     package.disabled = true;
+    #   };
+    # };
 
     direnv = {
       enable = true;
@@ -86,11 +86,22 @@
 
     zsh = {
       enable = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
       shellAliases = {
         vi = "nvim";
         vim = "nvim";
         view = "vim -R";
       };
+      # oh-my-zsh = {
+      #   enable = true;
+      #   plugins = [ "sudo" "git" "thefuck" "romkatv/powerlevel10k" ];
+      #   theme = "powerlevel10k/powerlevel10k";
+      # };
+      oh-my-zsh.enable = true;
+      oh-my-zsh.custom = "${pkgs.nur.repos.izorkin.oh-my-zsh-custom}";
+      oh-my-zsh.theme = "rkj-mod";
+      oh-my-zsh.plugins = [ "command-time" "history-sync" "git" "sudo" ];
       # homebrew changed dirs on arm64
       initExtra = ''
         				if [[ $(uname -m) == 'arm64' ]]; then
@@ -98,7 +109,6 @@
         				 fi
         			'';
     };
-
   };
 
 }

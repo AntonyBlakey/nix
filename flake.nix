@@ -14,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #nurpkgs = {
-    #	url = "github:nix-community/NUR/40cd392b888a4d78044d733b9fee61710f749a05";
-    #	flake = false;
-    #};
+    nur = {
+      url = "github:nix-community/NUR/40cd392b888a4d78044d733b9fee61710f749a05";
+      flake = false;
+    };
 
     gitcm = {
       url = "github:AntonyBlakey/NUR/05621052d7f290c12c1281339b6f898505ff35a6";
@@ -25,10 +25,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, gitcm }:
+  outputs = { self, nixpkgs, home-manager, darwin, nur, gitcm }:
     let
       overlays = [
-        (final: prev: { git-credential-manager = (import gitcm { pkgs = prev; }).git-credential-manager; })
+        (final: prev: {
+          git-credential-manager = (import gitcm { pkgs = prev; }).git-credential-manager;
+          nur = (import nur { pkgs = prev; nurpkgs = prev; });
+        })
       ];
     in
     {
