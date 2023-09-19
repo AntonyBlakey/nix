@@ -22,6 +22,8 @@
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.auto-optimise-store = true;
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   homebrew = {
     enable = true;
     onActivation.autoUpdate = true;

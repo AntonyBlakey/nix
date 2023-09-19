@@ -28,10 +28,7 @@
     ];
 
     file = {
-      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-      # # symlink to the Nix store copy.
-      # ".screenrc".source = dotfiles/screenrc;
+      ".p10k.zsh".source = ./p10k.zsh;
 
       # # You can also set the file content immediately.
       # ".gradle/gradle.properties".text = ''
@@ -93,20 +90,25 @@
         vim = "nvim";
         view = "vim -R";
       };
-      # oh-my-zsh = {
-      #   enable = true;
-      #   plugins = [ "sudo" "git" "thefuck" "romkatv/powerlevel10k" ];
-      #   theme = "powerlevel10k/powerlevel10k";
-      # };
-      oh-my-zsh.enable = true;
-      oh-my-zsh.custom = "${pkgs.nur.repos.izorkin.oh-my-zsh-custom}";
-      oh-my-zsh.theme = "rkj-mod";
-      oh-my-zsh.plugins = [ "command-time" "history-sync" "git" "sudo" ];
+      zplug = {
+        enable = true;
+      };
       # homebrew changed dirs on arm64
       initExtra = ''
+                zplug "zsh-users/zsh-completions"
+                zplug romkatv/powerlevel10k, as:theme, depth:1
+                zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
+                zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
+                zplug "plugins/git", from:oh-my-zsh
+                zplug "plugins/sudo", from:oh-my-zsh
+                if ! zplug check; then
+                  zplug install
+                fi
+                zplug load
+                source ~/.p10k.zsh
         				if [[ $(uname -m) == 'arm64' ]]; then
         				     eval "$(/opt/homebrew/bin/brew shellenv)"
-        				 fi
+        				fi
         			'';
     };
   };
