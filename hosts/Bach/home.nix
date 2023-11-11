@@ -48,21 +48,6 @@
 
     jq.enable = true;
 
-    # starship = {
-    #   enable = true;
-    #   settings = {
-    #     add_newline = false;
-
-    #     character = {
-    #       success_symbol = "[>](bold green)";
-    #       error_symbol = "[x](bold red)";
-    #       vimcmd_symbol = "[<](bold green)";
-    #     };
-
-    #     package.disabled = true;
-    #   };
-    # };
-
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -106,9 +91,6 @@
                 fi
                 zplug load
                 source ~/.p10k.zsh
-        				if [[ $(uname -m) == 'arm64' ]]; then
-        				     eval "$(/opt/homebrew/bin/brew shellenv)"
-        				fi
         			'';
     };
   };
