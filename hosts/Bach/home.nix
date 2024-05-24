@@ -63,6 +63,9 @@
           credentialStore = "keychain";
           helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
         };
+        init = {
+          defaultBranch = "main";
+        };
       };
     };
 
