@@ -5,9 +5,13 @@
 
     stateVersion = "24.05";
 
-    packages = [
-      pkgs.nixpkgs-fmt
-      pkgs.nil
+    packages = with pkgs; [
+      nixpkgs-fmt
+      nil
+  		vim
+  		curl
+  		jq
+      devenv
 
       # # It is sometimes useful to fine-tune packages, for example, by applying
       # # overrides. You can do that directly here, just don't forget the

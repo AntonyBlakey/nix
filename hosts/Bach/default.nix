@@ -1,27 +1,33 @@
-{ pkgs, ... }: {
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
+{ inputs, pkgs, ... }: {
+	home-manager = {
+		useGlobalPkgs = true;
+	  useUserPackages = true;
+	  users.antony = import ./home.nix;
+	};
+
   users.users.antony.home = "/Users/antony";
-  home-manager.users.antony = import ./home.nix;
 
 	# List packages installed in system profile. To search by name, run:
 	# $ nix-env -qaP | grep wget
 	environment.systemPackages = with pkgs; [
-		vim
-		curl
+		# These two need to be here, and toghether, to avoid a conflict.
 		gitAndTools.gitFull
     git-credential-manager
-    devenv
 	];
 
 	# Auto upgrade nix package and the daemon service.
 	services.nix-daemon.enable = true;
-	# nix.package = pkgs.nix;
-  nix.gc.automatic = true;
+	nix = {
+		package = pkgs.nix;
+	  gc.automatic = true;
+		settings = {
+		 	experimental-features = [ "nix-command" "flakes" ];
+		  auto-optimise-store = true;
+		};
+	};
 
-	# Necessary for using flakes on this system.
-	nix.settings.experimental-features = "nix-command flakes";
-  nix.settings.auto-optimise-store = true;
+	# Set Git commit hash for darwin-version.
+	system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
   security.pam.enableSudoTouchIdAuth = true;
 

@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "gitcm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1695040789,
-        "narHash": "sha256-X8JJxLaHXDK1a5HOyCyedFUDSQjHz/TxxmzrAKsEuOk=",
-        "owner": "AntonyBlakey",
-        "repo": "NUR",
-        "rev": "05621052d7f290c12c1281339b6f898505ff35a6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AntonyBlakey",
-        "repo": "NUR",
-        "rev": "05621052d7f290c12c1281339b6f898505ff35a6",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -73,30 +56,11 @@
         "type": "github"
       }
     },
-    "nur": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1694886364,
-        "narHash": "sha256-MbwCXmTpdBlJPuJwBmAI1wb/z9J84OC4M4d7hz7spSs=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "40cd392b888a4d78044d733b9fee61710f749a05",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "40cd392b888a4d78044d733b9fee61710f749a05",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "gitcm": "gitcm",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
