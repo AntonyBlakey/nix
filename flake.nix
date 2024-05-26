@@ -37,12 +37,7 @@
           # 	# Set Git commit hash for darwin-version.
           # 	system.configurationRevision = self.rev or self.dirtyRev or null;
           # }
-          home-manager.darwinModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            users.users.antony.home = "/Users/antony";
-            home-manager.users.antony = import ./home.nix;
-          }
+          home-manager.darwinModules.home-manager
         ];
       };
     };

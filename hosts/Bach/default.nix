@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  users.users.antony.home = "/Users/antony";
+  home-manager.users.antony = import ./home.nix;
+
 	# List packages installed in system profile. To search by name, run:
 	# $ nix-env -qaP | grep wget
 	environment.systemPackages = with pkgs; [
