@@ -1,16 +1,16 @@
 {
-  description = "Antony's Nix Configuration";
+  description = "Antony Blakey system configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin = {
-      url = "github:lnl7/nix-darwin";
+     home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,34 +25,29 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, gitcm }:
-    let
-      overlays = [
-        (final: prev: {
-          git-credential-manager = (import gitcm { pkgs = prev; }).git-credential-manager;
-          nur = (import nur { pkgs = prev; nurpkgs = prev; });
-        })
-      ];
-    in
-    {
-
-      darwinConfigurations = {
-        Bach = darwin.lib.darwinSystem rec {
-          system = "aarch64-darwin";
-          modules = [
-            ./hosts/Bach/default.nix
-            home-manager.darwinModules.home-manager
-          ];
-          specialArgs = {
-            pkgs = import nixpkgs {
-              inherit system;
-              inherit overlays;
-            };
-            inherit home-manager;
-          };
-        };
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nur, gitcm }: {
+    # Build darwin flake using:
+    # $ darwin-rebuild build --flake .#Bach
+    darwinConfigurations = {
+      Bach = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/Bach/default.nix
+          # { 
+          # 	# Set Git commit hash for darwin-version.
+          # 	system.configurationRevision = self.rev or self.dirtyRev or null;
+          # }
+          home-manager.darwinModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            users.users.antony.home = "/Users/antony";
+            home-manager.users.antony = import ./home.nix;
+          }
+        ];
       };
-
     };
 
+    # Expose the package set, including overlays, for convenience.
+    darwinPackages = self.darwinConfigurations.Bach.pkgs;
+  };
 }

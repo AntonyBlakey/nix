@@ -1,17 +1,13 @@
 { pkgs, ... }:
-
 {
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   home = {
 
-    stateVersion = "23.05";
+    stateVersion = "24.05";
 
     packages = [
       pkgs.nixpkgs-fmt
-      pkgs.rnix-lsp
+      pkgs.nil
 
       # # It is sometimes useful to fine-tune packages, for example, by applying
       # # overrides. You can do that directly here, just don't forget the
@@ -40,6 +36,9 @@
   };
 
   programs = {
+
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
 
     neovim = {
       enable = true;
@@ -72,7 +71,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       shellAliases = {
         vi = "nvim";
         vim = "nvim";
@@ -83,18 +82,18 @@
       };
       # homebrew changed dirs on arm64
       initExtra = ''
-                zplug "zsh-users/zsh-completions"
-                zplug romkatv/powerlevel10k, as:theme, depth:1
-                zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
-                zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
-                zplug "plugins/git", from:oh-my-zsh
-                zplug "plugins/sudo", from:oh-my-zsh
-                if ! zplug check; then
-                  zplug install
-                fi
-                zplug load
-                source ~/.p10k.zsh
-        			'';
+        zplug "zsh-users/zsh-completions"
+        zplug romkatv/powerlevel10k, as:theme, depth:1
+        zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
+        zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
+        zplug "plugins/git", from:oh-my-zsh
+        zplug "plugins/sudo", from:oh-my-zsh
+        if ! zplug check; then
+          zplug install
+        fi
+        zplug load
+        source ~/.p10k.zsh
+			'';
     };
   };
 

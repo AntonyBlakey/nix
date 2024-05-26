@@ -1,30 +1,32 @@
-{ pkgs, home-manager, ... }:
-{
-  nix.useDaemon = true;
+{ pkgs, ... }: {
+	# List packages installed in system profile. To search by name, run:
+	# $ nix-env -qaP | grep wget
+	environment.systemPackages = with pkgs; [
+		vim
+		curl
+		gitAndTools.gitFull
+    git-credential-manager
+    devenv
+	];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  # Will be fixed in Nix eventually
-  users.users.antony.home = "/Users/antony";
-  home-manager.users.antony = import ./home.nix { inherit pkgs; };
-
-  environment.systemPackages = [
-    pkgs.git-credential-manager
-  ];
-
-  # enable this so nix-darwin creates a zshrc sourcing needed environment changes
-  programs.zsh.enable = true;
-
-  services.nix-daemon.enable = true;
-  nix.package = pkgs.nixFlakes;
+	# Auto upgrade nix package and the daemon service.
+	services.nix-daemon.enable = true;
+	# nix.package = pkgs.nix;
   nix.gc.automatic = true;
 
-  nix.settings.experimental-features = "nix-command flakes";
+	# Necessary for using flakes on this system.
+	nix.settings.experimental-features = "nix-command flakes";
   nix.settings.auto-optimise-store = true;
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+	# Create /etc/zshrc that loads the nix-darwin environment.
+	programs.zsh.enable = true;
+
+	# Used for backwards compatibility, please read the changelog before changing.
+	# $ darwin-rebuild changelog
+	system.stateVersion = 4;
+
+	# The platform the configuration will be used on.
+	nixpkgs.hostPlatform = "aarch64-darwin";
 }
