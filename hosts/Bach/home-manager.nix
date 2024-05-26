@@ -9,6 +9,7 @@
     packages = with pkgs; [
       # anything you enable in programs will be installed here
     	curl
+      jq
       git-credential-manager
       nixpkgs-fmt
       nil
@@ -32,8 +33,6 @@
       viAlias = true;
       vimAlias = true;
     };
-
-    jq.enable = true;
 
     direnv = {
       enable = true;
