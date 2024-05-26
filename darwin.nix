@@ -1,24 +1,10 @@
 { inputs, pkgs, ... }: {
-	home-manager = {
-		useGlobalPkgs = true;
-	  useUserPackages = true;
-	  users.antony = import ./home.nix;
-	};
 
   users.users.antony.home = "/Users/antony";
 
 	# List packages installed in system profile. To search by name, run:
 	# $ nix-env -qaP | grep wget
 	environment.systemPackages = with pkgs; [
-		# These two need to be here, and toghether, to avoid a conflict.
-		gitAndTools.gitFull
-    git-credential-manager
-		neovim
-		curl
-		jq
-    nixpkgs-fmt
-    nil
-    devenv
 	];
 
 	# Auto upgrade nix package and the daemon service.
@@ -46,4 +32,5 @@
 
 	# The platform the configuration will be used on.
 	nixpkgs.hostPlatform = "aarch64-darwin";
+
 }

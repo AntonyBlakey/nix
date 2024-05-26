@@ -1,33 +1,22 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
+
+  xdg.enable = true;
 
   home = {
 
     stateVersion = "24.05";
 
-    # packages = [
-    #   # # It is sometimes useful to fine-tune packages, for example, by applying
-    #   # # overrides. You can do that directly here, just don't forget the
-    #   # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    #   # # fonts?
-    #   # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    #   # # You can also create simple shell scripts directly inside your
-    #   # # configuration. For example, this adds a command 'my-hello' to your
-    #   # # environment:
-    #   # (pkgs.writeShellScriptBin "my-hello" ''
-    #   #   echo "Hello, ${config.home.username}!"
-    #   # '')
-    # ];
+    packages = with pkgs; [
+      # anything you enable in programs will be installed here
+    	curl
+      git-credential-manager
+      nixpkgs-fmt
+      nil
+      devenv
+    ];
 
     file = {
       ".p10k.zsh".source = ./p10k.zsh;
-
-      # # You can also set the file content immediately.
-      # ".gradle/gradle.properties".text = ''
-      #   org.gradle.console=verbose
-      #   org.gradle.daemon.idletimeout=3600000
-      # '';
     };
 
   };
@@ -40,6 +29,8 @@
     neovim = {
       enable = true;
       defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
     };
 
     jq.enable = true;
@@ -70,8 +61,6 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       shellAliases = {
-        vi = "nvim";
-        vim = "nvim";
         view = "vim -R";
       };
       zplug = {

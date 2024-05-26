@@ -32,14 +32,15 @@
       Bach = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./hosts/Bach/default.nix
-          home-manager.darwinModules.home-manager
+          ./darwin.nix
+          home-manager.darwinModules.home-manager {
+        		home-manager.useGlobalPkgs = true;
+        	  home-manager.useUserPackages = true;
+        	  home-manager.users.antony = import ./hosts/Bach/home-manager.nix;
+          }
         ];
         specialArgs = { inherit inputs; };
       };
     };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations.Bach.pkgs;
   };
 }
