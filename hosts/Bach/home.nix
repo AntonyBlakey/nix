@@ -5,27 +5,20 @@
 
     stateVersion = "24.05";
 
-    packages = with pkgs; [
-      nixpkgs-fmt
-      nil
-  		vim
-  		curl
-  		jq
-      devenv
+    # packages = [
+    #   # # It is sometimes useful to fine-tune packages, for example, by applying
+    #   # # overrides. You can do that directly here, just don't forget the
+    #   # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    #   # # fonts?
+    #   # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-      # # It is sometimes useful to fine-tune packages, for example, by applying
-      # # overrides. You can do that directly here, just don't forget the
-      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-      # # fonts?
-      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-      # # You can also create simple shell scripts directly inside your
-      # # configuration. For example, this adds a command 'my-hello' to your
-      # # environment:
-      # (pkgs.writeShellScriptBin "my-hello" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
-    ];
+    #   # # You can also create simple shell scripts directly inside your
+    #   # # configuration. For example, this adds a command 'my-hello' to your
+    #   # # environment:
+    #   # (pkgs.writeShellScriptBin "my-hello" ''
+    #   #   echo "Hello, ${config.home.username}!"
+    #   # '')
+    # ];
 
     file = {
       ".p10k.zsh".source = ./p10k.zsh;

@@ -13,6 +13,12 @@
 		# These two need to be here, and toghether, to avoid a conflict.
 		gitAndTools.gitFull
     git-credential-manager
+		neovim
+		curl
+		jq
+    nixpkgs-fmt
+    nil
+    devenv
 	];
 
 	# Auto upgrade nix package and the daemon service.
