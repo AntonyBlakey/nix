@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     
-    nix-darwin = {
+    darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -13,13 +13,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+     
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, home-manager, ... }: {
+  outputs = inputs@{ self, darwin, home-manager, nixvim, ... }: {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Bach
     darwinConfigurations = {
-      Bach = nix-darwin.lib.darwinSystem {
+      Bach = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           ./darwin.nix
@@ -27,6 +32,9 @@
             home-manager.useGlobalPkgs = true;
         	  home-manager.useUserPackages = true;
         	  home-manager.users.antony = import ./hosts/Bach/home-manager.nix;
+            home-manager.sharedModules = [
+              nixvim.homeManagerModules.nixvim
+            ];
           }
         ];
         specialArgs = { inherit inputs; };

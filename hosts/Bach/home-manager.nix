@@ -13,7 +13,6 @@
       git-credential-manager
       nixpkgs-fmt
       nil
-      devenv
     ];
 
     file = {
@@ -27,12 +26,28 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    neovim = {
-      enable = true;
+  	nixvim = {
+      #   # https://github.com/nix-community/nixvim?tab=readme-ov-file
+  		enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
-    };
+
+      opts = {
+        number = true;
+        relativenumber = true;
+        shiftwidth = 2;
+      };
+
+      extraPlugins = [ pkgs.vimPlugins.gruvbox ];
+      colorscheme = "gruvbox";
+
+      plugins.lightline.enable = true;
+      plugins.which-key.enable = true;
+      plugins.comment.enable = true;
+      plugins.surround.enable = true;
+      plugins.telescope.enable = true;
+  	};
 
     direnv = {
       enable = true;
