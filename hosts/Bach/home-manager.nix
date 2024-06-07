@@ -47,6 +47,7 @@
       plugins.comment.enable = true;
       plugins.surround.enable = true;
       plugins.telescope.enable = true;
+      plugins.oil.enable = true;
   	};
 
     direnv = {
