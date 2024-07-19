@@ -8,11 +8,13 @@
 
     packages = with pkgs; [
       # anything you enable in programs will be installed here
-    	curl
+      curl
       jq
       git-credential-manager
       nixpkgs-fmt
       nil
+      _1password
+      gh
     ];
 
     file = {
@@ -26,9 +28,9 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-  	nixvim = {
+    nixvim = {
       #   # https://github.com/nix-community/nixvim?tab=readme-ov-file
-  		enable = true;
+      enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
@@ -48,7 +50,7 @@
       plugins.surround.enable = true;
       plugins.telescope.enable = true;
       plugins.oil.enable = true;
-  	};
+    };
 
     direnv = {
       enable = true;
@@ -83,18 +85,18 @@
       };
       # homebrew changed dirs on arm64
       initExtra = ''
-        zplug "zsh-users/zsh-completions"
-        zplug romkatv/powerlevel10k, as:theme, depth:1
-        zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
-        zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
-        zplug "plugins/git", from:oh-my-zsh
-        zplug "plugins/sudo", from:oh-my-zsh
-        if ! zplug check; then
-          zplug install
-        fi
-        zplug load
-        source ~/.p10k.zsh
-			'';
+                zplug "zsh-users/zsh-completions"
+                zplug romkatv/powerlevel10k, as:theme, depth:1
+                zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
+                zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
+                zplug "plugins/git", from:oh-my-zsh
+                zplug "plugins/sudo", from:oh-my-zsh
+                if ! zplug check; then
+                  zplug install
+                fi
+                zplug load
+                source ~/.p10k.zsh
+        			'';
     };
   };
 
