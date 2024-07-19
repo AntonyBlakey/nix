@@ -10,10 +10,8 @@
       # anything you enable in programs will be installed here
       curl
       jq
-      git-credential-manager
       nixpkgs-fmt
       nil
-      # _1password
       gh
     ];
 
@@ -66,9 +64,8 @@
       userEmail = "antony.blakey@gmail.com";
       extraConfig = {
         credential = {
-          credentialStore = "keychain";
-          helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
-          # helper = "!${pkgs._1password}/bin/op plugin run -- gh auth git-credential";
+          "https://github.com".helper = "!{pkgs.gh}/bin/gh auth git-credential";
+          "https://gist.github.com".helper = "!{pkgs.gh}/bin/gh auth git-credential";
         };
         init = {
           defaultBranch = "main";
@@ -98,8 +95,6 @@
                 fi
                 zplug load
                 source ~/.p10k.zsh
-                # export OP_PLUGIN_ALIASES_SOURCED=1
-                # alias gh="op plugin run -- gh"
         			'';
     };
   };
