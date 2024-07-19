@@ -10,7 +10,7 @@
       # anything you enable in programs will be installed here
       curl
       jq
-      git-credential-manager
+      # git-credential-manager
       nixpkgs-fmt
       nil
       _1password
@@ -44,12 +44,14 @@
       extraPlugins = [ pkgs.vimPlugins.gruvbox ];
       colorscheme = "gruvbox";
 
-      plugins.lightline.enable = true;
-      plugins.which-key.enable = true;
-      plugins.comment.enable = true;
-      plugins.surround.enable = true;
-      plugins.telescope.enable = true;
-      plugins.oil.enable = true;
+      plugins = {
+        lightline.enable = true;
+        which-key.enable = true;
+        comment.enable = true;
+        surround.enable = true;
+        telescope.enable = true;
+        oil.enable = true;
+      };
     };
 
     direnv = {
@@ -65,7 +67,8 @@
       extraConfig = {
         credential = {
           credentialStore = "keychain";
-          helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          # helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          helper = "!${pkgs._1password}/bin/op plugin run -- gh auth git-credential";
         };
         init = {
           defaultBranch = "main";
@@ -83,7 +86,6 @@
       zplug = {
         enable = true;
       };
-      # homebrew changed dirs on arm64
       initExtra = ''
                 zplug "zsh-users/zsh-completions"
                 zplug romkatv/powerlevel10k, as:theme, depth:1
