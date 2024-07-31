@@ -13,10 +13,13 @@
       nixpkgs-fmt
       nil
       gh
+      fzf
+      bat
+      starship
     ];
 
     file = {
-      ".p10k.zsh".source = ./p10k.zsh;
+      ".config/starship.toml".source = ./starship.toml;
     };
 
   };
@@ -85,7 +88,7 @@
       };
       initExtra = ''
                 zplug "zsh-users/zsh-completions"
-                zplug romkatv/powerlevel10k, as:theme, depth:1
+                # zplug romkatv/powerlevel10k, as:theme, depth:1
                 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
                 zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
                 zplug "plugins/git", from:oh-my-zsh
@@ -94,7 +97,9 @@
                   zplug install
                 fi
                 zplug load
-                source ~/.p10k.zsh
+                alias cat=bat
+                source <(fzf --zsh)
+                source <(starship init zsh)
         			'';
     };
   };
