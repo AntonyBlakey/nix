@@ -88,7 +88,6 @@
       };
       initExtra = ''
                 zplug "zsh-users/zsh-completions"
-                # zplug romkatv/powerlevel10k, as:theme, depth:1
                 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
                 zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
                 zplug "plugins/git", from:oh-my-zsh
