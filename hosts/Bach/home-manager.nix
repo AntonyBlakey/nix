@@ -16,6 +16,8 @@
       fzf
       bat
       starship
+      lazygit
+      devbox
     ];
 
     file = {
@@ -67,8 +69,8 @@
       userEmail = "antony.blakey@gmail.com";
       extraConfig = {
         credential = {
-          "https://github.com".helper = "!{pkgs.gh}/bin/gh auth git-credential";
-          "https://gist.github.com".helper = "!{pkgs.gh}/bin/gh auth git-credential";
+          "https://github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
+          "https://gist.github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
         };
         init = {
           defaultBranch = "main";
