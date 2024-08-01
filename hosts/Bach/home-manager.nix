@@ -18,6 +18,7 @@
       starship
       lazygit
       devbox
+      hyperfine
     ];
 
     file = {
@@ -94,6 +95,7 @@
                 zplug "zsh-users/zsh-history-substring-search", from:github, defer:2
                 zplug "plugins/git", from:oh-my-zsh
                 zplug "plugins/sudo", from:oh-my-zsh
+                zplug "agkozak/zsh-z"
                 if ! zplug check; then
                   zplug install
                 fi
