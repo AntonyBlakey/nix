@@ -19,6 +19,7 @@
       lazygit
       devbox
       hyperfine
+      hermitcli
     ];
 
     file = {
