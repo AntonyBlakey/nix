@@ -48,8 +48,8 @@
         shiftwidth = 2;
       };
 
-      extraPlugins = [ pkgs.vimPlugins.gruvbox ];
-      colorscheme = "gruvbox";
+      extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
+      colorscheme = "bluloco-light";
 
       plugins = {
         lightline.enable = true;
@@ -111,3 +111,4 @@
   };
 
 }
+
