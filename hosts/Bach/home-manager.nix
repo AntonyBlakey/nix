@@ -19,10 +19,13 @@
       lazygit
       devbox
       hyperfine
+      kitty
     ];
 
     file = {
       ".config/starship.toml".source = ./starship.toml;
+      ".config/kitty/kitty.conf".source = ./kitty.conf;
+      ".config/kitty/current-theme.conf".source = ./current-theme.conf;
     };
 
   };
