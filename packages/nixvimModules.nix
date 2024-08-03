@@ -54,16 +54,16 @@
 
         ### theme
 
-        colorschemes = {
-          gruvbox = {
-            enable = true;
-            settings = {
-              contrastDark = "hard";
-            };
-          };
-          #ayu.enable = true;
-          #base16.colorscheme = "papercolor-dark"; # molokai sonokai
-        };
+        extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
+        colorscheme = "bluloco-dark";
+        # colorschemes = {
+        # gruvbox = {
+        # enable = true;
+        # settings = {
+        #   contrastDark = "hard";
+        # };
+        # };
+        # };
       };
     })
 

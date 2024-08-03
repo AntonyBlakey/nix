@@ -21,7 +21,7 @@
       pkgs.devbox
       pkgs.hyperfine
       pkgs.nixvim
-      pkgs.nix-inspect
+      # pkgs.nix-inspect
       # pkgs.spvim
       # pkgs.vim-distro-format
     ];
