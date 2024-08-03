@@ -1,11 +1,17 @@
 {
+  # Inspired by https://github.com/PaulGrandperrin/nix-systems.git
+
   description = "Antony Blakey system configuration";
 
   inputs = {
-    nixpkgs =
-      {
-        url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-      };
+
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs = {
+      type = "indirect"; # take it from the registry
+      id = "nixpkgs";
+    };
 
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -20,29 +26,20 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
+
+    nix-inspect = {
+      url = "github:bluskript/nix-inspect";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, nixvim } @ inputs: {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Bach
-    darwinConfigurations = {
-      Bach = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./darwin.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.antony = import ./hosts/Bach/home-manager.nix;
-            home-manager.sharedModules = [
-              nixvim.homeManagerModules.nixvim
-            ];
-          }
-        ];
-        specialArgs = { inherit inputs; };
-      };
-    };
+  outputs = inputs: {
+    schemas = import ./schemas.nix inputs;
+    overlays = import ./overlays.nix inputs;
+    packages = import ./packages.nix inputs;
+    darwinConfigurations = import ./darwinConfigurations.nix inputs;
   };
 }

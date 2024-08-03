@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, inputs, ... }: {
 
   xdg.enable = true;
 
@@ -7,25 +7,29 @@
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      # anything you enable in programs will be installed here
-      curl
-      jq
-      nixpkgs-fmt
-      nil
-      gh
-      fzf
-      bat
-      starship
-      lazygit
-      devbox
-      hyperfine
-      kitty
+      config.nix.package
+
+      pkgs.curl
+      pkgs.jq
+      pkgs.nixpkgs-fmt
+      pkgs.nil
+      pkgs.gh
+      pkgs.fzf
+      pkgs.bat
+      pkgs.starship
+      pkgs.lazygit
+      pkgs.devbox
+      pkgs.hyperfine
+      pkgs.nixvim
+      pkgs.nix-inspect
+      # pkgs.spvim
+      # pkgs.vim-distro-format
     ];
 
     file = {
       ".config/starship.toml".source = ./starship.toml;
-      ".config/kitty/kitty.conf".source = ./kitty.conf;
-      ".config/kitty/current-theme.conf".source = ./current-theme.conf;
+      # ".config/kitty/kitty.conf".source = ./kitty.conf;
+      # ".config/kitty/current-theme.conf".source = ./current-theme.conf;
     };
 
   };
@@ -34,32 +38,6 @@
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    nixvim = {
-      #   # https://github.com/nix-community/nixvim?tab=readme-ov-file
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-
-      opts = {
-        number = true;
-        relativenumber = true;
-        shiftwidth = 2;
-      };
-
-      extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
-      colorscheme = "bluloco-light";
-
-      plugins = {
-        lightline.enable = true;
-        which-key.enable = true;
-        comment.enable = true;
-        surround.enable = true;
-        telescope.enable = true;
-        oil.enable = true;
-      };
-    };
 
     direnv = {
       enable = true;
@@ -81,6 +59,32 @@
         };
       };
     };
+
+    # nixvim = {
+    #   #   # https://github.com/nix-community/nixvim?tab=readme-ov-file
+    #   enable = true;
+    #   defaultEditor = true;
+    #   viAlias = true;
+    #   vimAlias = true;
+
+    #   opts = {
+    #     number = true;
+    #     relativenumber = true;
+    #     shiftwidth = 2;
+    #   };
+
+    #   extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
+    #   colorscheme = "bluloco-light";
+
+    #   plugins = {
+    #     lightline.enable = true;
+    #     which-key.enable = true;
+    #     comment.enable = true;
+    #     surround.enable = true;
+    #     telescope.enable = true;
+    #     oil.enable = true;
+    #   };
+    # };
 
     zsh = {
       enable = true;
