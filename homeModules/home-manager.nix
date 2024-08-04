@@ -7,7 +7,7 @@
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      config.nix.package
+      #config.nix.package
 
       pkgs.curl
       pkgs.jq

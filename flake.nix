@@ -1,5 +1,7 @@
 {
-  # Inspired by https://github.com/PaulGrandperrin/nix-systems.git
+  # Inspired by
+  # - https://github.com/PaulGrandperrin/nix-systems.git
+  # - https://github.com/dustinlyons/nixos-config.git
 
   description = "Antony Blakey system configuration";
 
@@ -7,11 +9,7 @@
 
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs = {
-      type = "indirect"; # take it from the registry
-      id = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin = {
       url = "github:lnl7/nix-darwin";
