@@ -4,8 +4,9 @@ let
     inputs.darwin.lib.darwinSystem {
       specialArgs = { inherit inputs; };
       modules = [ module ];
+      system = "aarch64-darwin";
     };
 in
 {
-  Bach = mkDarwinConfig ./darwinModules/Bach.nix;
+  Bach = mkDarwinConfig ./darwinModules/common.nix;
 }
