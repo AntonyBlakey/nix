@@ -7,6 +7,7 @@
     stateVersion = "24.05";
 
     packages = with pkgs; [
+      pkgs.mkalias
       pkgs.curl
       pkgs.jq
       pkgs.nixpkgs-fmt
@@ -40,35 +41,16 @@
     };
 
     # Need to create aliases because Launchbar doesn't look through symlinks.
-    activation.link-apps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      nix_apps="$HOME/Applications/Home Manager Apps"
-      new_nix_apps="$HOME/Applications/Nix"
-
-      echo "setting up $new_nix_apps ..." >&2
-
+    activation.link-apps = lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      new_nix_apps="${config.home.homeDirectory}/Applications/Nix"
       rm -rf "$new_nix_apps"
       mkdir -p "$new_nix_apps"
-
-      for src in "$nix_apps"/**.app ; do
-        dest=$(basename "$src")
-        /usr/bin/osascript -e "
-          use framework \"Foundation\"
-          set theAliasPath to \"$src\"
-          set theURL to current application's NSURL's fileURLWithPath: theAliasPath
-          set { resolvedURL, resolveError } to current application's NSURL's URLByResolvingAliasFileAtURL:theURL options:0 |error|: (reference)
-          if resolveError is missing value then
-            set resolvedPath to POSIX file (resolvedURL's |path|() as text) as alias
-            set theNIXDirectory to POSIX file \"$new_nix_apps\"
-            tell application \"Finder\"
-                make new alias file to resolvedPath at theNIXDirectory
-                set name of result to \"$dest\"
-            end tell
-          else
-          end if
-        " 1>/dev/null
-
-        # This was my fallback ...
-        # echo 'tell application "'$src'" to activate' | /usr/bin/osacompile -o "$new_nix_apps/$dest" -
+      find -H -L "$newGenPath/home-files/Applications" -name "*.app" -type d -print | while read -r app; do
+        real_app=$(readlink -f "$app")
+        app_name=$(basename "$app")
+        target_app="$new_nix_apps/$app_name"
+        echo "Alias '$real_app' to '$target_app'"
+        $DRY_RUN_CMD ${pkgs.mkalias}/bin/mkalias "$real_app" "$target_app"
       done
     '';
   };
