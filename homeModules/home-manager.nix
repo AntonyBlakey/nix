@@ -41,7 +41,7 @@
     };
 
     # Need to create aliases because Launchbar doesn't look through symlinks.
-    activation.link-apps = lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+    activation.linkMacApplications = lib.hm.dag.entryAfter [ "writeBarrier" ] ''
       new_nix_apps="${config.home.homeDirectory}/Applications/Nix"
       rm -rf "$new_nix_apps"
       mkdir -p "$new_nix_apps"
@@ -49,7 +49,7 @@
         real_app=$(readlink -f "$app")
         app_name=$(basename "$app")
         target_app="$new_nix_apps/$app_name"
-        echo "Alias '$real_app' to '$target_app'"
+        echo "Create alias $target_app"
         $DRY_RUN_CMD ${pkgs.mkalias}/bin/mkalias "$real_app" "$target_app"
       done
     '';
