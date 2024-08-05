@@ -19,16 +19,20 @@
     enableNixpkgsReleaseCheck = true; # check for release version mismatch between Home Manager and Nixpkgs
 
     packages = [
-      pkgs.curl
-      pkgs.jq
       pkgs.nixfmt-rfc-style
       pkgs.nixd
-      pkgs.gh
+      pkgs.devbox
+
+      pkgs.curl
+      pkgs.jq
       pkgs.fzf
       pkgs.bat
+
+      pkgs.gh
       pkgs.lazygit
-      pkgs.devbox
+
       pkgs.hyperfine
+
       pkgs.nixvim
     ];
 
