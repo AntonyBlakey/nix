@@ -1,12 +1,12 @@
 inputs:
 let
-  mkDarwinConfig = module:
+  mkDarwinConfig = modules:
     inputs.darwin.lib.darwinSystem {
       specialArgs = { inherit inputs; };
-      modules = [ module ];
       system = "aarch64-darwin";
+      modules = modules;
     };
 in
 {
-  Bach = mkDarwinConfig ./darwinModules/common.nix;
+  Bach = mkDarwinConfig [ ./darwinModules/common.nix ./darwinModules/homebrew.nix ];
 }
