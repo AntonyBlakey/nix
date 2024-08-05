@@ -21,7 +21,7 @@
     extraSpecialArgs = config._module.specialArgs;
     users = {
       antony = {
-        imports = [ ../homeModules/home-manager.nix ];
+        imports = [ ../homeModules/common.nix ];
       };
     };
   };

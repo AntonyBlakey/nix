@@ -6,7 +6,7 @@
 
     stateVersion = "24.05";
 
-    packages = with pkgs; [
+    packages = [
       pkgs.mkalias
       pkgs.curl
       pkgs.jq
@@ -22,14 +22,6 @@
       pkgs.nixvim
 
       pkgs.kitty
-
-      pkgs.ksvim
-      pkgs.lzvim
-      pkgs.nvchad
-      pkgs.aovim
-      pkgs.lnvim
-      pkgs.spvim
-      pkgs.vim-distro-format
 
       # pkgs.nix-inspect
     ];
