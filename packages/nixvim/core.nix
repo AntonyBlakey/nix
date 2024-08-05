@@ -1,20 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     viAlias = true;
     vimAlias = true;
     clipboard.providers.wl-copy.enable = true;
 
-    extraConfigVim = ''
-        '';
+    extraConfigVim = '''';
 
-    extraConfigLua = ''
-        '';
+    extraConfigLua = '''';
 
-    extraConfigLuaPre = ''
-        '';
+    extraConfigLuaPre = '''';
 
-    extraConfigLuaPost = ''
-        '';
+    extraConfigLuaPost = '''';
 
     extraPackages = [ ];
     # extraLuaPackages = [ ];
@@ -51,7 +48,10 @@
 
     ### theme
 
-    extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
+    extraPlugins = [
+      pkgs.vimPlugins.bluloco-nvim
+      pkgs.vimPlugins.lush-nvim
+    ];
     colorscheme = "bluloco-dark";
     # colorschemes = {
     # gruvbox = {

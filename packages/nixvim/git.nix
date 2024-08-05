@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     plugins = {
       fugitive.enable = true; # git wrapper # kickstart

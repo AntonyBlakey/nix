@@ -15,7 +15,13 @@ inputs: rec {
   # devenv = (final: prev: {
   #   devenv = inputs.devenv.packages.${prev.stdenv.hostPlatform.system}.devenv;
   # });
-  local-packages = (final: prev: import ./packages { pkgs = final; inherit inputs; });
+  local-packages = (
+    final: prev:
+    import ./packages {
+      pkgs = final;
+      inherit inputs;
+    }
+  );
   default = local-packages;
   # default = inputs.nixpkgs.lib.composeManyExtensions [
   # all-channels

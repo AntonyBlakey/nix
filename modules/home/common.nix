@@ -1,6 +1,15 @@
-{ pkgs, config, inputs, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
 
-  imports = [ ./starship ./kitty ];
+  imports = [
+    ./starship
+    ./kitty
+  ];
 
   xdg.enable = true;
 
@@ -11,8 +20,8 @@
     packages = [
       pkgs.curl
       pkgs.jq
-      pkgs.nixfmt
-      pkgs.nil
+      pkgs.nixfmt-rfc-style
+      pkgs.nixd
       pkgs.gh
       pkgs.fzf
       pkgs.bat
@@ -117,4 +126,3 @@
   };
 
 }
-

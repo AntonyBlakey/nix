@@ -1,14 +1,15 @@
-{ lib
-, neovim
-, symlinkJoin
-, makeWrapper
-, git
-, ripgrep
-, fd
-, lazygit
-, gcc
-, name
-, conf-repo-url
+{
+  lib,
+  neovim,
+  symlinkJoin,
+  makeWrapper,
+  git,
+  ripgrep,
+  fd,
+  lazygit,
+  gcc,
+  name,
+  conf-repo-url,
 }:
 let
   nvim-full = neovim.override { withNodeJs = true; };
@@ -23,6 +24,14 @@ symlinkJoin {
       --inherit-argv0 \
       --set "NVIM_APPNAME" "${name}" \
       --run 'test ! -d "$XDG_CONFIG_HOME/$NVIM_APPNAME" && mkdir -p "$XDG_CONFIG_HOME/$NVIM_APPNAME" && ${git}/bin/git clone --depth 1 ${conf-repo-url} "$XDG_CONFIG_HOME/$NVIM_APPNAME"' \
-      --suffix "PATH" ":" "${lib.makeBinPath [ ripgrep fd git lazygit gcc ]}"
+      --suffix "PATH" ":" "${
+        lib.makeBinPath [
+          ripgrep
+          fd
+          git
+          lazygit
+          gcc
+        ]
+      }"
   '';
 }

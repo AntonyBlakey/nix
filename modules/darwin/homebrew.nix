@@ -1,8 +1,7 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
 
-  imports = [
-    inputs.nix-homebrew.darwinModules.nix-homebrew
-  ];
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   # https://github.com/zhaofengli/nix-homebrew
   nix-homebrew = {

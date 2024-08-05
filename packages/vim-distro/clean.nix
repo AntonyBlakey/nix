@@ -1,4 +1,5 @@
-{ writeShellApplication }: writeShellApplication {
+{ writeShellApplication }:
+writeShellApplication {
   name = "vim-distro-format";
   text = ''
     test $# -eq 0 && echo "Missing application name" && exit 1 
