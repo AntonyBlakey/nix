@@ -3,16 +3,16 @@ let
   mkDarwinConfig =
     modules:
     inputs.darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       inherit modules;
       specialArgs = {
         inherit inputs;
       };
-      system = "aarch64-darwin";
     };
 in
 {
   Bach = mkDarwinConfig [
-    ./modules/darwin/common.nix
-    ./modules/darwin/homebrew.nix
+    ../modules/darwin/common.nix
+    ../modules/darwin/homebrew.nix
   ];
 }

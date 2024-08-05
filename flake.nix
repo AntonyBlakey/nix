@@ -23,6 +23,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+      inputs.nix-darwin.follows = "darwin";
     };
 
     nix-inspect = {
@@ -30,7 +31,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nix-darwin.follows = "darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Optional: Declarative tap management
     homebrew-core = {
@@ -45,9 +50,18 @@
 
   };
 
-  outputs = inputs: {
-    overlays = import ./overlays.nix inputs;
-    packages = import ./packages inputs;
-    darwinConfigurations = import ./darwinConfigurations.nix inputs;
-  };
+  outputs =
+    inputs:
+    let
+      inputs_with_lib = inputs // {
+        lib = inputs.nixpkgs.lib;
+      };
+    in
+    {
+      inherit inputs_with_lib;
+
+      # packages = import ./packages inputs_with_lib;
+      # overlays = import ./overlays inputs_with_lib;
+      darwinConfigurations = import ./systems/darwin.nix inputs_with_lib;
+    };
 }

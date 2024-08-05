@@ -7,7 +7,7 @@
   ];
 
   nixpkgs = {
-    overlays = [ (import ../../overlays.nix inputs).default ];
+    overlays = [ (import ../../overlays inputs).default ];
     config = import ../../config/pkgs.nix;
   };
 
@@ -16,7 +16,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = config._module.specialArgs;
+    extraSpecialArgs = config._module.specialArgs; # pulls inputs into home-manager
     users = {
       antony = {
         imports = [ ../home/common.nix ];

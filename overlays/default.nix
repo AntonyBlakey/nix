@@ -16,22 +16,17 @@ inputs: rec {
   #   devenv = inputs.devenv.packages.${prev.stdenv.hostPlatform.system}.devenv;
   # });
   local-packages = (
-    final: prev:
-    import ./packages {
-      pkgs = final;
-      inherit inputs;
-    }
+    final: prev: (import ../packages/single-system.nix inputs prev.stdenv.hostPlatform.system)
   );
-  default = local-packages;
-  # default = inputs.nixpkgs.lib.composeManyExtensions [
-  # all-channels
-  # local-packages
-  # rclonefs
-  # nixpkgs-update
-  # devenv
+  default = inputs.lib.composeManyExtensions [
+    # all-channels
+    local-packages
+    # rclonefs
+    # nixpkgs-update
+    # devenv
 
-  # inputs.nur.overlay
-  # inputs.rust-overlay.overlays.default
-  # inputs.nix-alien.overlays.default
-  # ];
+    # inputs.nur.overlay
+    # inputs.rust-overlay.overlays.default
+    # inputs.nix-alien.overlays.default
+  ];
 }

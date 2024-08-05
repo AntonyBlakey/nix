@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+pkgs: {
   ksvim = pkgs.callPackage ./install.nix {
     name = "ksvim";
     conf-repo-url = "https://github.com/nvim-lua/kickstart.nvim.git";

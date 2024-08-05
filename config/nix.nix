@@ -1,6 +1,7 @@
-_: {
+{ lib, pkgs, ... }:
+{
   nix = {
-    # package = lib.mkDefault pkgs.nix;
+    package = lib.mkDefault pkgs.nix;
     gc.automatic = true;
     settings = {
       experimental-features = [

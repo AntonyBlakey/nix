@@ -16,6 +16,7 @@
   home = {
 
     stateVersion = "24.05";
+    enableNixpkgsReleaseCheck = true; # check for release version mismatch between Home Manager and Nixpkgs
 
     packages = [
       pkgs.curl
