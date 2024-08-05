@@ -1,28 +1,13 @@
-{ lib
-, neovim
-, symlinkJoin
-, makeWrapper
-, git
-, ripgrep
-, fd
-, lazygit
-, gcc
-, name
-, conf-repo-url
-}:
-let
-  nvim-full = neovim.override { withNodeJs = true; };
-in
-symlinkJoin {
-  inherit name;
-  paths = [ nvim-full ];
-  buildInputs = [ makeWrapper ];
-  postBuild = ''
-    mv $out/bin/nvim $out/bin/${name}
-    wrapProgram $out/bin/${name} \
-      --inherit-argv0 \
-      --set "NVIM_APPNAME" "${name}" \
-      --run 'test ! -d "$XDG_CONFIG_HOME/$NVIM_APPNAME" && mkdir -p "$XDG_CONFIG_HOME/$NVIM_APPNAME" && ${git}/bin/git clone --depth 1 ${conf-repo-url} "$XDG_CONFIG_HOME/$NVIM_APPNAME"' \
-      --suffix "PATH" ":" "${lib.makeBinPath [ ripgrep fd git lazygit gcc ]}"
-  '';
+{ pkgs, ... }:
+{
+  ksvim = pkgs.callPackage ./install.nix {
+    name = "ksvim";
+    conf-repo-url = "https://github.com/nvim-lua/kickstart.nvim.git";
+  };
+  lzvim = pkgs.callPackage ./install.nix { name = "lzvim"; conf-repo-url = "https://github.com/LazyVim/starter.git"; };
+  nvchad = pkgs.callPackage ./install.nix { name = "nvchad"; conf-repo-url = "https://github.com/NvChad/NvChad.git"; };
+  aovim = pkgs.callPackage ./install.nix { name = "aovim"; conf-repo-url = "https://github.com/AstroNvim/AstroNvim.git"; };
+  lnvim = pkgs.callPackage ./install.nix { name = "lnvim"; conf-repo-url = "https://github.com/LunarVim/LunarVim.git"; };
+  spvim = pkgs.callPackage ./install.nix { name = "spvim"; conf-repo-url = "https://gitlab.com/SpaceVim/SpaceVim.git"; };
+  vim-distro-clean = pkgs.callPackage ./clean.nix { };
 }

@@ -1,17 +1,14 @@
-{ inputs, lib, pkgs, config, ... }: {
+{ inputs, config, ... }: {
 
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    ../../config/nix.nix
   ];
 
   nixpkgs = {
-    overlays = [
-      (import ../overlays.nix inputs).default # adds local packages to nixpkgs
-    ];
-    # config = import ../../nixpkgs/config.nix;
+    overlays = [ (import ../../overlays.nix inputs).default ];
+    config = import ../../config/pkgs.nix;
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   users.users.antony.home = "/Users/antony";
 
@@ -21,22 +18,13 @@
     extraSpecialArgs = config._module.specialArgs;
     users = {
       antony = {
-        imports = [ ../homeModules/common.nix ];
+        imports = [ ../home/common.nix ];
       };
     };
   };
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-
-  nix = {
-    package = lib.mkDefault pkgs.nix;
-    gc.automatic = true;
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      # auto-optimise-store = true; # maybe causes build failures
-    };
-  };
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;

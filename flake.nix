@@ -7,8 +7,6 @@
 
   inputs = {
 
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin = {
@@ -48,9 +46,8 @@
   };
 
   outputs = inputs: {
-    schemas = import ./schemas.nix inputs;
     overlays = import ./overlays.nix inputs;
-    packages = import ./packages.nix inputs;
+    packages = import ./packages inputs;
     darwinConfigurations = import ./darwinConfigurations.nix inputs;
   };
 }

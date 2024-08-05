@@ -8,5 +8,5 @@ let
     };
 in
 {
-  Bach = mkDarwinConfig [ ./darwinModules/common.nix ./darwinModules/homebrew.nix ];
+  Bach = mkDarwinConfig [ ./modules/darwin/common.nix ./modules/darwin/homebrew.nix ];
 }

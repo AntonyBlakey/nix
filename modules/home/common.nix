@@ -1,5 +1,7 @@
 { pkgs, config, inputs, lib, ... }: {
 
+  imports = [ ./starship ./kitty ];
+
   xdg.enable = true;
 
   home = {
@@ -7,30 +9,18 @@
     stateVersion = "24.05";
 
     packages = [
-      pkgs.mkalias
       pkgs.curl
       pkgs.jq
-      pkgs.nixpkgs-fmt
+      pkgs.nixfmt
       pkgs.nil
       pkgs.gh
       pkgs.fzf
       pkgs.bat
-      pkgs.starship
       pkgs.lazygit
       pkgs.devbox
       pkgs.hyperfine
       pkgs.nixvim
-
-      pkgs.kitty
-
-      # pkgs.nix-inspect
     ];
-
-    file = {
-      ".config/starship.toml".source = ./starship.toml;
-      ".config/kitty/kitty.conf".source = ./kitty.conf;
-      ".config/kitty/current-theme.conf".source = ./current-theme.conf;
-    };
 
     # Need to create aliases because Launchbar doesn't look through symlinks.
     activation.linkMacApplications = lib.hm.dag.entryAfter [ "writeBarrier" ] ''
