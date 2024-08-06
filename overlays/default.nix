@@ -15,12 +15,12 @@ inputs: rec {
   # devenv = (final: prev: {
   #   devenv = inputs.devenv.packages.${prev.stdenv.hostPlatform.system}.devenv;
   # });
-  local-packages = (
-    final: prev: (import ../packages/single-system.nix inputs prev.stdenv.hostPlatform.system)
-  );
+  # local-packages = (
+  #   final: prev: (import ../packages/single-system.nix inputs prev.stdenv.hostPlatform.system)
+  # );
   default = inputs.lib.composeManyExtensions [
     # all-channels
-    local-packages
+    # local-packages
     # rclonefs
     # nixpkgs-update
     # devenv

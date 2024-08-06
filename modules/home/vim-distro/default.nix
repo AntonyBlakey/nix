@@ -1,4 +1,5 @@
-pkgs: {
+{ pkgs, ... }:
+let
   ksvim = pkgs.callPackage ./install.nix {
     name = "ksvim";
     conf-repo-url = "https://github.com/nvim-lua/kickstart.nvim.git";
@@ -24,4 +25,15 @@ pkgs: {
     conf-repo-url = "https://gitlab.com/SpaceVim/SpaceVim.git";
   };
   vim-distro-clean = pkgs.callPackage ./clean.nix { };
+in
+{
+  home.packages = [
+    ksvim
+    lzvim
+    nvchad
+    aovim
+    lnvim
+    spvim
+    vim-distro-clean
+  ];
 }

@@ -1,5 +1,5 @@
-{ pkgs, inputs }:
-{
+{ inputs, pkgs, ... }:
+let
   nixvim = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvimWithModule {
     extraSpecialArgs = {
       inherit inputs;
@@ -16,4 +16,8 @@
       ];
     };
   };
+in
+{
+  home.packages = [ nixvim ];
+  programs.zsh.shellAliases.view = "vim -R";
 }

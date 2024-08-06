@@ -19,7 +19,15 @@
     extraSpecialArgs = config._module.specialArgs; # pulls inputs into home-manager
     users = {
       antony = {
-        imports = [ ../home/common.nix ];
+        imports = [
+          ../home/core.nix
+          ../home/git.nix
+          ../home/cmdline.nix
+          ../home/nix-tools.nix
+          ../home/kitty
+          ../home/nixvim
+          ../home/vim-distro
+        ];
       };
     };
   };

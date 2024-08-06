@@ -24,7 +24,6 @@
     #
     # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
     mutableTaps = true;
-
   };
 
   # https://github.com/malob/nixpkgs/blob/master/darwin/homebrew.nix

@@ -60,8 +60,6 @@
     {
       inherit inputs_with_lib;
 
-      # packages = import ./packages inputs_with_lib;
-      # overlays = import ./overlays inputs_with_lib;
       darwinConfigurations = import ./systems/darwin.nix inputs_with_lib;
     };
 }
