@@ -12,6 +12,8 @@
   };
 
   users.users.antony.home = "/Users/antony";
+  # sudo dseditgroup -o edit -a antony -t user wheel
+  users.groups.wheel.members = [ "antony" ];
 
   home-manager = {
     useGlobalPkgs = true;

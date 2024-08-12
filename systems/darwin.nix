@@ -13,6 +13,6 @@ in
 {
   Bach = mkDarwinConfig [
     ../modules/darwin/common.nix
-    # ../modules/darwin/homebrew.nix
+    ../modules/darwin/homebrew.nix
   ];
 }

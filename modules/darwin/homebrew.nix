@@ -13,23 +13,12 @@
 
     # User owning the Homebrew prefix
     user = "antony";
+    group = "staff";
 
-    # Optional: Declarative tap management
-    taps = {
-      "homebrew/homebrew-core" = inputs.homebrew-core;
-      "homebrew/homebrew-cask" = inputs.homebrew-cask;
-    };
-
-    # Optional: Enable fully-declarative tap management
-    #
-    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
     mutableTaps = true;
   };
 
-  # https://github.com/malob/nixpkgs/blob/master/darwin/homebrew.nix
   homebrew.enable = true;
-  homebrew.casks = [
-    # "kitty"
-  ];
+  homebrew.casks = [ "nikitabobko/tap/aerospace" ];
 
 }

@@ -37,17 +37,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Optional: Declarative tap management
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-
   };
 
   outputs =
