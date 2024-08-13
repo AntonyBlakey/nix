@@ -6,7 +6,7 @@
   # https://github.com/zhaofengli/nix-homebrew
   nix-homebrew = {
     # Install Homebrew under the default prefix
-    enable = true;
+    enable = false;
 
     # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
     enableRosetta = false;
@@ -19,7 +19,7 @@
   };
 
   homebrew = {
-    enable = true;
+    enable = false;
 
     onActivation = {
       autoUpdate = false;
