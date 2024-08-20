@@ -52,7 +52,7 @@
       pkgs.vimPlugins.bluloco-nvim
       pkgs.vimPlugins.lush-nvim
     ];
-    colorscheme = "bluloco-dark";
+    colorscheme = "bluloco-light";
     # colorschemes = {
     # gruvbox = {
     # enable = true;
