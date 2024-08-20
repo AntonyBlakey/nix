@@ -11,6 +11,7 @@
       pkgs.yq
       pkgs.fzf
       pkgs.bat
+      pkgs.eza
 
       # pkgs.hyperfine
     ];
@@ -43,6 +44,7 @@
                 fi
                 zplug load
                 alias cat=bat
+                alias ls=eza
                 source <(fzf --zsh)
                 source <(starship init zsh)
         			'';
