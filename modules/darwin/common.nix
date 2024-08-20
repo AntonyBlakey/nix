@@ -26,7 +26,6 @@
           ../home/git.nix
           ../home/cmdline.nix
           ../home/nix-tools.nix
-          ../home/wezterm
           ../home/nixvim
           ../home/vim-distro
         ];
