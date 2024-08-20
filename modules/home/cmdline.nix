@@ -8,6 +8,7 @@
     packages = [
       pkgs.curl
       pkgs.jq
+      pkgs.yq
       pkgs.fzf
       pkgs.bat
 
