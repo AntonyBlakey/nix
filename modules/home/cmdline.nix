@@ -6,9 +6,10 @@
   home = {
 
     packages = [
+      pkgs.coreutils
       pkgs.curl
       pkgs.jq
-      pkgs.yq
+      pkgs.yq-go
       pkgs.fzf
       pkgs.bat
       pkgs.eza
