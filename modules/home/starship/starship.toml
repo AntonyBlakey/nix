@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 [hostname]
 disabled = true
 
@@ -5,9 +7,9 @@ disabled = true
 disabled = true
 
 [character]
-success_symbol = "[>](bold green)"
-error_symbol = "[x](bold red)"
-vimcmd_symbol = "[<](bold green)"
+success_symbol = "[INS ](bold blue)[ >](bold blue)"
+error_symbol = "[INS ](bold red)[ x](bold red)"
+vimcmd_symbol = "[ VI ](bold bright-green inverted)[ >](bold blue)"
 
 [git_commit]
 tag_symbol = " tag "
