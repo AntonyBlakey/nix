@@ -13,6 +13,7 @@
       pkgs.fzf
       pkgs.bat
       pkgs.eza
+      pkgs.patch
 
       # pkgs.hyperfine
     ];
