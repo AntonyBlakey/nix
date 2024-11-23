@@ -14,6 +14,7 @@
       pkgs.bat
       pkgs.eza
       pkgs.patch
+      pkgs.vips
 
       # pkgs.hyperfine
     ];
