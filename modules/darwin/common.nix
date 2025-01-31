@@ -27,7 +27,7 @@
           ../home/cmdline.nix
           ../home/nix-tools.nix
           ../home/nixvim
-          ../home/vim-distro
+          # ../home/vim-distro
         ];
       };
     };

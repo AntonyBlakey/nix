@@ -6,6 +6,7 @@
   home = {
 
     packages = [
+      pkgs.bashInteractive
       pkgs.coreutils
       pkgs.curl
       pkgs.jq
@@ -15,8 +16,6 @@
       pkgs.eza
       pkgs.patch
       pkgs.vips
-
-      # pkgs.hyperfine
     ];
   };
 
