@@ -8,6 +8,10 @@
         "nix-command"
         "flakes"
       ];
+      trusted-users = [
+        "root"
+        "antony"
+      ];
       # auto-optimise-store = true; # maybe causes build failures
     };
   };
