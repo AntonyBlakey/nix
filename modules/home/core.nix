@@ -30,30 +30,4 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # nixvim = {
-  #   #   # https://github.com/nix-community/nixvim?tab=readme-ov-file
-  #   enable = true;
-  #   defaultEditor = true;
-  #   viAlias = true;
-  #   vimAlias = true;
-
-  #   opts = {
-  #     number = true;
-  #     relativenumber = true;
-  #     shiftwidth = 2;
-  #   };
-
-  #   extraPlugins = [ pkgs.vimPlugins.bluloco-nvim pkgs.vimPlugins.lush-nvim ];
-  #   colorscheme = "bluloco-light";
-
-  #   plugins = {
-  #     lightline.enable = true;
-  #     which-key.enable = true;
-  #     comment.enable = true;
-  #     surround.enable = true;
-  #     telescope.enable = true;
-  #     oil.enable = true;
-  #   };
-  # };
-
 }
