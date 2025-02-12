@@ -26,9 +26,6 @@
           ../home/git.nix
           ../home/cmdline.nix
           ../home/nix-tools.nix
-          ../home/lazyvim
-          #../home/nixvim
-          # ../home/vim-distro
         ];
       };
     };
