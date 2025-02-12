@@ -31,9 +31,6 @@
     };
   };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   # Set Git commit hash for darwin-version.
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
   # Used for backwards compatibility, please read the changelog before changing.

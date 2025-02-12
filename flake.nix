@@ -19,23 +19,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-      inputs.nix-darwin.follows = "darwin";
-    };
-
     nix-inspect = {
       url = "github:bluskript/nix-inspect";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-      inputs.nix-darwin.follows = "darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-homebrew = {
+    #   url = "github:zhaofengli-wip/nix-homebrew";
+    #   inputs.nix-darwin.follows = "darwin";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
   };
 
