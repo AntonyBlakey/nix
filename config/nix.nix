@@ -2,7 +2,7 @@
 {
   nix = {
     package = lib.mkDefault pkgs.nix;
-    gc.automatic = false;
+    gc.automatic = true;
     settings = {
       experimental-features = [
         "nix-command"
